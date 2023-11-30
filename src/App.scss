@@ -10,6 +10,55 @@ body {
   margin: 0;
   background-color: #121212;
   height: 100%;
+
+  //
+  --inter-ad-skip-button-height: 52px;
+  --inter-ad-top-bar-height: 34px;
+  --inter-ad-bottom-bar-height: 24px;
+  --green: #6aaa64;
+  --green-4: #538d4e;
+  --wordle-high-contrast-green: #58a351;
+  --spellingBeeYellow: #f7da21;
+  --yellow-3: #c9b458;
+  --yellow-4: #b59f3b;
+  --newsGray-10: #dfdfdf;
+  --newsGray-100: #121212;
+  --newsGray-85: #363636;
+  --gray-3: #ccc;
+  --gray-4: #dcdcdc;
+  --gray-6: #f4f4f4;
+  --gray-13: #d3d6da;
+  --gray-18: #787c7e;
+  --gray-19: #878a8c;
+  --gray-20: #edeff1;
+  --gray-21: #f6f7f8;
+  --gray-22: #e3e3e1;
+  --gray-23: #a6a6a6;
+  --gray-24: #818384;
+  --gray-25: #565758;
+  --gray-26: #3a3a3c;
+  --gray-27: #424242;
+  --gray-28: #59595a;
+  --gray-29: #afafaf;
+  --black: #000;
+  --white: #fff;
+  --newsDarkContentPrimary: #f8f8f8;
+  --wordleBlack: #212121;
+  --wordleBlack-2: #272729;
+  --wordleBlack-3: #1a1a1b;
+  --wordleBlack-4: #121213;
+  --wordleBlack-5: #2f2f31;
+  --linkBlue: #477aaa;
+  --orange: #f5793a;
+  --blue: #85c0f9;
+  --outlineBlue: #2671dc;
+  --color-tone-1: var(--newsDarkContentPrimary);
+  --color-tone-2: var(--gray-24);
+  --color-tone-3: var(--gray-25);
+  --color-tone-4: var(--gray-26);
+  --color-tone-5: var(--wordleBlack-2);
+  --color-tone-6: var(--wordleBlack-3);
+  --color-tone-7: var(--wordleBlack-4);
 }
 
 nav {
@@ -61,4 +110,18 @@ nav h1 {
 }
 #disabled {
   background-color: #3a393c;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 23px 0 rgba(0, 0, 0, 0.2);
+}
+.close {
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }

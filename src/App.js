@@ -5,6 +5,22 @@ import React, { useState, createContext, useEffect } from "react";
 import Board from "./components/Board";
 import GameOver from "./components/GameOver";
 import Keyboard from "./components/Keyboard";
+import GameInfo from "./components/GameInfo";
+import ReactModal from "react-modal";
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "#121213",
+    color: "white",
+    border: "1px solid #1a1a1b",
+    maxWidth: "450px",
+  },
+};
 
 export const AppContext = createContext();
 
@@ -18,6 +34,7 @@ function App() {
     gameOver: false,
     guessedWord: false,
   });
+  const [infoModal, setInfoModal] = useState(true);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -96,6 +113,24 @@ function App() {
           </div>
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
+        <ReactModal
+          onAfterClose={() => {
+            <div>close</div>;
+          }}
+          overlayClassName={"modalOverlay"}
+          isOpen={infoModal}
+          style={customStyles}
+          onRequestClose={() => {
+            setInfoModal(false);
+          }}
+        >
+          <div style={{ position: "relative" }}>
+            <div onClick={() => setInfoModal(false)} className="close">
+              x
+            </div>
+            <GameInfo />
+          </div>
+        </ReactModal>
       </AppContext.Provider>
     </div>
   );
