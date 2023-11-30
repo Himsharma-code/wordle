@@ -1,16 +1,19 @@
 .keyboard {
   margin: 0 8px;
-
+  max-width: 435px;
+  width: 100%;
   .line1 {
     display: flex;
     width: 100%;
     margin: 0 auto 8px;
+    gap: 4px;
     touch-action: manipulation;
   }
   .line2 {
     display: flex;
     width: 100%;
     margin: 0 auto 8px;
+    gap: 4px;
     touch-action: manipulation;
     .spacer {
       flex: 0.5;
@@ -20,6 +23,7 @@
     display: flex;
     width: 100%;
     margin: 0 auto 8px;
+    gap: 4px;
     touch-action: manipulation;
   }
 }
