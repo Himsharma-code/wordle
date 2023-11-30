@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
+import classes from "./Key.module.scss";
+import cn from "classnames";
 
 function Key({ keyVal, bigKey, disabled }) {
   const { gameOver, onSelectLetter, onDelete, onEnter } =
@@ -17,7 +19,9 @@ function Key({ keyVal, bigKey, disabled }) {
   };
   return (
     <div
-      className="key"
+      className={cn(classes.key, {
+        [classes.enter]: keyVal === "ENTER" || keyVal === "DELETE",
+      })}
       id={bigKey ? "big" : disabled && "disabled"}
       onClick={selectLetter}
     >

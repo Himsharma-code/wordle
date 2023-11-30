@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
+import classes from "./Letter.module.scss";
 
 function Letter({ letterPos, attemptVal }) {
   const { board, setDisabledLetters, currAttempt, correctWord } =
@@ -17,9 +18,10 @@ function Letter({ letterPos, attemptVal }) {
       console.log(letter);
       setDisabledLetters((prev) => [...prev, letter]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currAttempt.attempt]);
   return (
-    <div className="letter" id={letterState}>
+    <div className={classes.letter} id={letterState}>
       {letter}
     </div>
   );

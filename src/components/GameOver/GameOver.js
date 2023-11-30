@@ -1,18 +1,11 @@
 import React, { useContext } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
+import classes from "./GameOver.module.scss";
 
 function GameOver() {
-  const {
-    board,
-    setBoard,
-    currAttempt,
-    gameOver,
-    onSelectLetter,
-    correctWord,
-    onDelete,
-  } = useContext(AppContext);
+  const { currAttempt, gameOver, correctWord } = useContext(AppContext);
   return (
-    <div className="gameOver">
+    <div className={classes.gameOver}>
       <h3>
         {gameOver.guessedWord
           ? "You Correctly Guessed the Wordle"

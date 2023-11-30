@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useContext } from "react";
-import Key from "./Key";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
+import classes from "./Keyboard.module.scss";
+import Key from "../Key";
 
 function Keyboard() {
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
@@ -54,18 +55,20 @@ function Keyboard() {
 
   console.log(disabledLetters);
   return (
-    <div className="keyboard" onKeyDown={handleKeyboard}>
-      <div className="line1">
+    <div className={classes.keyboard} onKeyDown={handleKeyboard}>
+      <div className={classes.line1}>
         {keys1.map((key) => {
           return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;
         })}
       </div>
-      <div className="line2">
+      <div className={classes.line2}>
+        <div className={classes.spacer}></div>
         {keys2.map((key) => {
           return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;
         })}
+        <div className={classes.spacer}></div>
       </div>
-      <div className="line3">
+      <div className={classes.line3}>
         <Key keyVal={"ENTER"} bigKey />
         {keys3.map((key) => {
           return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;

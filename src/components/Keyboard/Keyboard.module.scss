@@ -1,0 +1,25 @@
+.keyboard {
+  margin: 0 8px;
+
+  .line1 {
+    display: flex;
+    width: 100%;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
+  }
+  .line2 {
+    display: flex;
+    width: 100%;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
+    .spacer {
+      flex: 0.5;
+    }
+  }
+  .line3 {
+    display: flex;
+    width: 100%;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
+  }
+}
