@@ -9,7 +9,6 @@ function Keyboard() {
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
   const {
-    board,
     disabledLetters,
     currAttempt,
     gameOver,
@@ -43,6 +42,7 @@ function Keyboard() {
         });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [currAttempt]
   );
   useEffect(() => {

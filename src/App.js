@@ -1,26 +1,8 @@
-import "./App.scss";
-
 import { boardDefault, generateWordSet } from "./Words";
 import React, { useState, createContext, useEffect } from "react";
-import Board from "./components/Board";
-import GameOver from "./components/GameOver";
-import Keyboard from "./components/Keyboard";
-import GameInfo from "./components/GameInfo";
-import ReactModal from "react-modal";
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "#121213",
-    color: "white",
-    border: "1px solid #1a1a1b",
-    maxWidth: "450px",
-  },
-};
+import { Navigate, Route, Routes } from "react-router-dom";
+import PrivateLayout from "./layouts/PrivateLayout";
+import AuthLayout from "./layouts/AuthLayout";
 
 export const AppContext = createContext();
 
@@ -34,7 +16,6 @@ function App() {
     gameOver: false,
     guessedWord: false,
   });
-  const [infoModal, setInfoModal] = useState(true);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -60,7 +41,7 @@ function App() {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
-    console.log(currAttempt);
+
     if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });
       return;
@@ -88,9 +69,6 @@ function App() {
 
   return (
     <div className="App">
-      <nav>
-        <h1>Wordle</h1>
-      </nav>
       <AppContext.Provider
         value={{
           board,
@@ -106,31 +84,11 @@ function App() {
           gameOver,
         }}
       >
-        <div className="game">
-          <div className="boardContainer">
-            {" "}
-            <Board />
-          </div>
-          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
-        </div>
-        <ReactModal
-          onAfterClose={() => {
-            <div>close</div>;
-          }}
-          overlayClassName={"modalOverlay"}
-          isOpen={infoModal}
-          style={customStyles}
-          onRequestClose={() => {
-            setInfoModal(false);
-          }}
-        >
-          <div style={{ position: "relative" }}>
-            <div onClick={() => setInfoModal(false)} className="close">
-              x
-            </div>
-            <GameInfo />
-          </div>
-        </ReactModal>
+        <Routes>
+          <Route path="/wordle/*" element={<PrivateLayout />} />
+          <Route path="/auth/*" element={<AuthLayout />} />
+          <Route path="/*" element={<Navigate to={"/wordle/play"} />} />
+        </Routes>
       </AppContext.Provider>
     </div>
   );
