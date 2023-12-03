@@ -1,18 +1,16 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { authRoutes } from "src/routes";
 import classes from "./AuthLayout.module.scss";
 
 const AuthLayout = () => {
   return (
     <div className={classes.wrapper}>
-      <nav>
-        <h1>Wordle</h1>
-      </nav>
       <Routes>
-        {authRoutes.map(({ path, component: Component }) => {
-          return <Route path={path} element={<Component />} />;
+        {authRoutes.map(({ path, component: Component }, i) => {
+          return <Route key={i} path={path} element={<Component />} />;
         })}
+        <Route path="/*" element={<Navigate to={"/auth/login"} />} />
       </Routes>
     </div>
   );

@@ -12,7 +12,6 @@ function Letter({ letterPos, attemptVal }) {
   const letterState =
     currAttempt.attempt > attemptVal &&
     (correct ? "correct" : almost ? "almost" : "error");
-
   useEffect(() => {
     if (letter !== "" && !correct && !almost) {
       console.log(letter);
@@ -21,7 +20,7 @@ function Letter({ letterPos, attemptVal }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currAttempt.attempt]);
   return (
-    <div className={classes.letter} id={letterState}>
+    <div className={classes.letter} id={letterState || ""}>
       {letter}
     </div>
   );

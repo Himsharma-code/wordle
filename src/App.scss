@@ -4,6 +4,15 @@
   text-align: center;
   background-color: #121212;
   color: white;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 body {
@@ -11,6 +20,7 @@ body {
   margin: 0;
   background-color: #121212;
   height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 
   //
   --inter-ad-skip-button-height: 52px;

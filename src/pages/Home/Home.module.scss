@@ -1,0 +1,36 @@
+.home {
+  color: black;
+  .contentWelcomeMain {
+    .icon {
+      img {
+        max-width: 150px;
+        width: 100%;
+      }
+    }
+    h1 {
+      font-size: 44px;
+      line-height: 1.045em;
+      margin-bottom: 16px;
+    }
+    h2 {
+      max-width: 400px;
+      font-size: 32px;
+      line-height: 36px;
+      font-weight: 400;
+      margin-top: 0;
+    }
+    .buttonContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .dateContainer {
+      h3 {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+      }
+    }
+  }
+}

@@ -53,25 +53,42 @@ function Keyboard() {
     };
   }, [handleKeyboard]);
 
-  console.log(disabledLetters);
   return (
     <div className={classes.keyboard} onKeyDown={handleKeyboard}>
       <div className={classes.line1}>
         {keys1.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;
+          return (
+            <Key
+              key={key}
+              keyVal={key}
+              disabled={disabledLetters.includes(key)}
+            />
+          );
         })}
       </div>
       <div className={classes.line2}>
         <div className={classes.spacer}></div>
         {keys2.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;
+          return (
+            <Key
+              key={key}
+              keyVal={key}
+              disabled={disabledLetters.includes(key)}
+            />
+          );
         })}
         <div className={classes.spacer}></div>
       </div>
       <div className={classes.line3}>
         <Key keyVal={"ENTER"} bigKey />
         {keys3.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />;
+          return (
+            <Key
+              key={key}
+              keyVal={key}
+              disabled={disabledLetters.includes(key)}
+            />
+          );
         })}
         <Key keyVal={"DELETE"} bigKey />
       </div>

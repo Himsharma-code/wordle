@@ -3,6 +3,7 @@ import React, { useState, createContext, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import PrivateLayout from "./layouts/PrivateLayout";
 import AuthLayout from "./layouts/AuthLayout";
+import PublicLayout from "./layouts/PublicLayout";
 
 export const AppContext = createContext();
 
@@ -87,7 +88,8 @@ function App() {
         <Routes>
           <Route path="/wordle/*" element={<PrivateLayout />} />
           <Route path="/auth/*" element={<AuthLayout />} />
-          <Route path="/*" element={<Navigate to={"/wordle/play"} />} />
+          <Route path="/home/*" element={<PublicLayout />} />
+          <Route path="/*" element={<Navigate to={"/home/welcome"} />} />
         </Routes>
       </AppContext.Provider>
     </div>

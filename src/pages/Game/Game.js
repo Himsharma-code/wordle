@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactModal from "react-modal";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "src/App";
 import Board from "src/components/Board";
 import GameInfo from "src/components/GameInfo";
@@ -22,7 +23,12 @@ const customStyles = {
 };
 
 const Game = () => {
-  const [infoModal, setInfoModal] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const infoModalState = searchParams.get("infoModal");
+
+  const [infoModal, setInfoModal] = useState(!!infoModalState);
   const { gameOver } = useContext(AppContext);
 
   return (
@@ -41,12 +47,15 @@ const Game = () => {
         overlayClassName={"modalOverlay"}
         isOpen={infoModal}
         style={customStyles}
-        onRequestClose={() => {
-          setInfoModal(false);
-        }}
       >
         <div style={{ position: "relative" }}>
-          <div onClick={() => setInfoModal(false)} className="close">
+          <div
+            onClick={() => {
+              setInfoModal(false);
+              navigate(".", { replace: true });
+            }}
+            className="close"
+          >
             x
           </div>
           <GameInfo />
