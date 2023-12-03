@@ -11,6 +11,7 @@ const formattedDate = date.toLocaleString("en-US", options);
 
 const Home = () => {
   const navigate = useNavigate();
+
   return (
     <div className={classes.home}>
       <div className={classes.contentWelcomeMain}>

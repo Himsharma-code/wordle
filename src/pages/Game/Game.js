@@ -1,25 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import ReactModal from "react-modal";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "src/App";
 import Board from "src/components/Board";
 import GameInfo from "src/components/GameInfo";
 import GameOver from "src/components/GameOver";
 import Keyboard from "src/components/Keyboard";
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, Dialog, Modal } from "@mui/material";
+import classes from "./Game.module.scss";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "#121213",
-    color: "white",
-    border: "1px solid #1a1a1b",
-    maxWidth: "450px",
-  },
+const style = {
+  background: "rgb(18, 18, 19)",
+  color: "#fff",
+  p: 4,
+  maxWidth: 500,
 };
 
 const Game = () => {
@@ -31,6 +25,11 @@ const Game = () => {
   const [infoModal, setInfoModal] = useState(!!infoModalState);
   const { gameOver } = useContext(AppContext);
 
+  const handleClose = () => {
+    setInfoModal(false);
+    navigate(".", { replace: true });
+  };
+
   return (
     <div>
       <div className="game">
@@ -40,27 +39,16 @@ const Game = () => {
         </div>
         {gameOver.gameOver ? <GameOver /> : <Keyboard />}
       </div>
-      <ReactModal
-        onAfterClose={() => {
-          <div>close</div>;
-        }}
-        overlayClassName={"modalOverlay"}
-        isOpen={infoModal}
-        style={customStyles}
+      <Dialog
+        classes={{ paper: classes.paper }}
+        open={infoModal}
+        onClose={handleClose}
       >
-        <div style={{ position: "relative" }}>
-          <div
-            onClick={() => {
-              setInfoModal(false);
-              navigate(".", { replace: true });
-            }}
-            className="close"
-          >
-            x
-          </div>
+        <Box sx={{ ...style }}>
+          <CloseIcon onClick={handleClose} className={classes.close} />
           <GameInfo />
-        </div>
-      </ReactModal>
+        </Box>
+      </Dialog>
     </div>
   );
 };

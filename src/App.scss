@@ -123,16 +123,9 @@ nav h1 {
   background-color: #3a393c;
 }
 
-.modalOverlay {
-  position: fixed;
-  inset: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 4px 23px 0 rgba(0, 0, 0, 0.2);
-}
-.close {
-  color: white;
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
+// .modalOverlay {
+//   position: fixed;
+//   inset: 0px;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   box-shadow: 0 4px 23px 0 rgba(0, 0, 0, 0.2);
+// }
