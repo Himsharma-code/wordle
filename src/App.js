@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import PrivateLayout from "./layouts/PrivateLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import PublicLayout from "./layouts/PublicLayout";
+import { AuthProvider } from "./context/AuthContext";
 
 export const AppContext = createContext();
 
@@ -70,28 +71,30 @@ function App() {
 
   return (
     <div className="App">
-      <AppContext.Provider
-        value={{
-          board,
-          setBoard,
-          currAttempt,
-          setCurrAttempt,
-          correctWord,
-          onSelectLetter,
-          onDelete,
-          onEnter,
-          setDisabledLetters,
-          disabledLetters,
-          gameOver,
-        }}
-      >
-        <Routes>
-          <Route path="/wordle/*" element={<PrivateLayout />} />
-          <Route path="/auth/*" element={<AuthLayout />} />
-          <Route path="/home/*" element={<PublicLayout />} />
-          <Route path="/*" element={<Navigate to={"/home/welcome"} />} />
-        </Routes>
-      </AppContext.Provider>
+      <AuthProvider>
+        <AppContext.Provider
+          value={{
+            board,
+            setBoard,
+            currAttempt,
+            setCurrAttempt,
+            correctWord,
+            onSelectLetter,
+            onDelete,
+            onEnter,
+            setDisabledLetters,
+            disabledLetters,
+            gameOver,
+          }}
+        >
+          <Routes>
+            <Route path="/wordle/*" element={<PrivateLayout />} />
+            <Route path="/auth/*" element={<AuthLayout />} />
+            <Route path="/home/*" element={<PublicLayout />} />
+            <Route path="/*" element={<Navigate to={"/home/welcome"} />} />
+          </Routes>
+        </AppContext.Provider>
+      </AuthProvider>
     </div>
   );
 }

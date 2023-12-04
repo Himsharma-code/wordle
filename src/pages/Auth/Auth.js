@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Auth.module.scss";
 import { TextField, Button, Grid } from "@mui/material";
+import { useAuthActions } from "src/hooks/auth/useLogin";
 
 const Auth = () => {
+  const { register } = useAuthActions();
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
+    // Use 'credentials' state to perform login logic
+    register(credentials);
+    // Reset the form after submission
+    setCredentials({ email: "", password: "" });
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className={classes.authWrapper}>
       <div> Log in or create an account</div>
@@ -15,10 +34,13 @@ const Auth = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="Username or Email"
+                label="Email"
                 variant="outlined"
                 fullWidth
                 required
+                name="email"
+                value={credentials.email}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -28,6 +50,9 @@ const Auth = () => {
                 variant="outlined"
                 fullWidth
                 required
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
