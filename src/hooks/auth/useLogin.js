@@ -1,5 +1,6 @@
 import { register as registerApi } from "src/api/auth";
 import { useAuth } from "src/context/AuthContext";
+import Cookies from "js-cookie";
 
 const useAuthActions = () => {
   const { data, actions } = useAuth();
@@ -10,30 +11,17 @@ const useAuthActions = () => {
     setUser({ ...user, loading: true });
     try {
       const response = await registerApi(body);
-      console.log("response", response);
-      setUser({ user: response, loading: false });
+      const user = response?.data?.user || null;
+      Cookies.set("token", user?.token || "");
+      setUser({ data: user, loading: false });
+      return { status: 1, data: response };
     } catch (error) {
       setUser({ user: null, loading: false, error: error });
+      return { status: 0, data: error };
     }
   };
 
   return { register };
-
-  //   return useMutation((input) => register(input), {
-  //     onSuccess: (response, { rememberMe }) =>
-  //       loginUser({ ...response, rememberMe }),
-  //     onError: (error) => {
-  //       if (error?.response?.field) {
-  //         setError(error?.response?.field || "password", {
-  //           type: "API_ERROR",
-  //           message:
-  //             error?.response?.message ||
-  //             "There is an existing account associated with this email address",
-  //         });
-  //       } else {
-  //       }
-  //     },
-  //   });
 };
 
 export { useAuthActions };

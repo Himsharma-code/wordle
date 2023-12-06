@@ -1,9 +1,18 @@
-import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { privateRoutes } from "src/routes";
 import classes from "./PrivateLayout.module.scss";
+import { isLoggedIn } from "src/utils/auth";
 
 const PrivateLayout = () => {
+  // const navigate = useNavigate();
+  const isLogin = isLoggedIn();
+
+  useEffect(() => {
+    // !isLogin && navigate("/");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogin]);
+
   return (
     <div className={classes.wrapper}>
       <nav>

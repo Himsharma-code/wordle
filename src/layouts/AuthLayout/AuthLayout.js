@@ -1,12 +1,18 @@
-import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { authRoutes } from "src/routes";
 import classes from "./AuthLayout.module.scss";
-import { useAuth } from "src/context/AuthContext";
+import { isLoggedIn } from "src/utils/auth";
 
 const AuthLayout = () => {
-  const sas = useAuth();
-  console.log("sas", sas);
+  const navigate = useNavigate();
+  const isLogin = isLoggedIn();
+
+  useEffect(() => {
+    if (isLogin) navigate("/wordle/play?infoModal=true");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogin]);
+
   return (
     <div className={classes.wrapper}>
       <Routes>
