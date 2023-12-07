@@ -10,7 +10,7 @@ const Auth = () => {
   const navigate = useNavigate();
 
   const [authState, setAuthState] = useState("login"); //'register
-  console.log("authState", authState);
+
   const [error, setError] = useState("");
   const authAction = authState === "login" ? login : register;
   const handleSubmit = async (e, credentials) => {
@@ -20,8 +20,9 @@ const Auth = () => {
     if (status) {
       navigate("/wordle/play?infoModal=true");
     } else {
-      console.log("data", data);
-      setError(data?.response?.data?.error || "");
+      setError(
+        data?.response?.data?.error || data?.response?.data?.message || ""
+      );
     }
     // Reset the form after submission
   };

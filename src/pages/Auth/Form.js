@@ -30,6 +30,10 @@ const Form = ({ handleSubmit, error, setError, submitText = "login" }) => {
         onSubmit={async (e) => {
           setLoading(true);
           await handleSubmit(e, credentials);
+          setCredentials({
+            email: "",
+            password: "",
+          });
           setLoading(false);
         }}
       >
