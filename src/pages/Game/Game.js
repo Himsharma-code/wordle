@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "src/App";
 import Board from "src/components/Board";
@@ -6,7 +6,7 @@ import GameInfo from "src/components/GameInfo";
 import GameOver from "src/components/GameOver";
 import Keyboard from "src/components/Keyboard";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Dialog, Modal } from "@mui/material";
+import { Box, Dialog } from "@mui/material";
 import classes from "./Game.module.scss";
 
 const style = {

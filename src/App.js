@@ -12,12 +12,14 @@ function App() {
   const [board, setBoard] = useState(boardDefault);
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letter: 0 });
   const [wordSet, setWordSet] = useState(new Set());
-  const [correctWord, setCorrectWord] = useState("");
+  const [correctWord, setCorrectWord] = useState("ocean");
   const [disabledLetters, setDisabledLetters] = useState([]);
   const [gameOver, setGameOver] = useState({
     gameOver: false,
     guessedWord: false,
   });
+  const [isInvalidWord, setIsInvalidWord] = useState(false);
+  console.log("correctWord", correctWord);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -27,6 +29,7 @@ function App() {
   }, []);
 
   const onEnter = () => {
+    setIsInvalidWord(false);
     if (currAttempt.letter !== 5) return;
 
     let currWord = "";
@@ -36,10 +39,9 @@ function App() {
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
     } else {
-      alert("Word not found");
+      setIsInvalidWord(true);
     }
-
-    if (currWord === correctWord) {
+    if (currWord.toLocaleLowerCase() === correctWord.toLocaleLowerCase()) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
@@ -85,6 +87,8 @@ function App() {
             setDisabledLetters,
             disabledLetters,
             gameOver,
+            isInvalidWord,
+            setIsInvalidWord,
           }}
         >
           <Routes>

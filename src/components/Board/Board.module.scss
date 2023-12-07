@@ -10,5 +10,31 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 5px;
+    &.invalid {
+      animation: shake 150ms 2 linear;
+    }
+    @keyframes shake {
+      0% {
+        transform: translate(3px, 0);
+      }
+      50% {
+        transform: translate(-3px, 0);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+  }
+}
+
+.snackbar > div {
+  width: fit-content;
+  background-color: #fff;
+  text-align: center;
+  color: black;
+  font-weight: 700;
+  div {
+    width: 100%;
+    text-align: center;
   }
 }
