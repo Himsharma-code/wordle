@@ -3,6 +3,8 @@ import classes from "./Home.module.scss";
 import Logo from "src/assets/wordle.jpeg";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { isLoggedIn } from "src/utils/auth";
+import cn from "classnames";
 
 const date = new Date();
 
@@ -11,6 +13,7 @@ const formattedDate = date.toLocaleString("en-US", options);
 
 const Home = () => {
   const navigate = useNavigate();
+  const isLogin = isLoggedIn();
 
   return (
     <div className={classes.home}>
@@ -23,18 +26,24 @@ const Home = () => {
           Get 6 chances to guess a <span className="noWrap">5-letter</span>{" "}
           word.
         </h2>
-        <div className={classes.buttonContainer}>
-          <Button
-            variant="outlined"
-            size="large"
-            color="inherit"
-            style={{ borderRadius: 30 }}
-            onClick={() => {
-              navigate("/auth/login");
-            }}
-          >
-            Log in
-          </Button>
+        <div
+          className={cn(classes.buttonContainer, {
+            [classes.isLogin]: isLogin,
+          })}
+        >
+          {!isLogin && (
+            <Button
+              variant="outlined"
+              size="large"
+              color="inherit"
+              style={{ borderRadius: 30 }}
+              onClick={() => {
+                navigate("/auth/login");
+              }}
+            >
+              Log in
+            </Button>
+          )}
           <Button
             variant="contained"
             size="large"

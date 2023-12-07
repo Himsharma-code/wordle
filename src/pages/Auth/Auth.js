@@ -1,104 +1,55 @@
 import React, { useState } from "react";
 import classes from "./Auth.module.scss";
-import {
-  TextField,
-  Button,
-  Grid,
-  CircularProgress,
-  FormControl,
-  FormHelperText,
-} from "@mui/material";
 import { useAuthActions } from "src/hooks/auth/useLogin";
-import { useAuth } from "src/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Form from "./Form";
+import { Box, Button } from "@mui/material";
 
 const Auth = () => {
-  const { register } = useAuthActions();
+  const { register, login } = useAuthActions();
   const navigate = useNavigate();
-  const {
-    data: { user },
-  } = useAuth();
 
-  const { loading = false } = user;
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-  });
+  const [authState, setAuthState] = useState("login"); //'register
+  console.log("authState", authState);
   const [error, setError] = useState("");
-
-  const handleSubmit = async (e) => {
+  const authAction = authState === "login" ? login : register;
+  const handleSubmit = async (e, credentials) => {
     e.preventDefault();
     // Use 'credentials' state to perform login logic
-    const { status, data } = await register(credentials);
+    const { status, data } = await authAction(credentials);
     if (status) {
       navigate("/wordle/play?infoModal=true");
     } else {
       console.log("data", data);
       setError(data?.response?.data?.error || "");
-      setCredentials({ email: "", password: "" });
     }
     // Reset the form after submission
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setError("");
-    setCredentials((prevCredentials) => ({
-      ...prevCredentials,
-      [name]: value,
-    }));
-  };
-
   return (
     <div className={classes.authWrapper}>
-      <div> Log in or create an account</div>
-      <div className={classes.loginWithEmail}>
-        <form onSubmit={handleSubmit}>
-          <FormControl error={error} variant="standard">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  name="email"
-                  value={credentials.email}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="Password"
-                  type="password"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  name="password"
-                  value={credentials.password}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormHelperText>{error}</FormHelperText>
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  disabled={loading}
-                  size="large"
-                >
-                  Login {loading && <CircularProgress color="inherit" />}
-                </Button>
-              </Grid>
-            </Grid>
-          </FormControl>
-        </form>
-      </div>
-      <div className={classes.loginWithGoogle}> </div>
+      <div> {authState}</div>
+      <Form
+        error={error}
+        setError={setError}
+        submitText={authState}
+        handleSubmit={handleSubmit}
+      />
+      <Box sx={{ textAlign: "center", color: "black", p: 3 }}>or</Box>
+      <Button
+        sx={{ textTransform: "capitalize", maxWidth: "300px" }}
+        type="submit"
+        variant="outlined"
+        color="primary"
+        fullWidth
+        onClick={() => {
+          setAuthState(authState === "login" ? "register" : "login");
+        }}
+        size="large"
+      >
+        {authState === "login" ? "register" : "login"}
+      </Button>
+      <div className={classes.loginWithGoogle}></div>
     </div>
   );
 };

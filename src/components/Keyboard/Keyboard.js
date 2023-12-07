@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useContext } from "react";
 import { AppContext } from "../../App";
 import classes from "./Keyboard.module.scss";
+import BackspaceIcon from "@mui/icons-material/Backspace";
 import Key from "../Key";
 
 function Keyboard() {
@@ -90,7 +91,10 @@ function Keyboard() {
             />
           );
         })}
-        <Key keyVal={"DELETE"} bigKey />
+        <Key
+          keyVal={<BackspaceIcon fontSize="small" sx={{ px: 1 }} />}
+          bigKey
+        />
       </div>
     </div>
   );

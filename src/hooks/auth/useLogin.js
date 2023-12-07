@@ -1,4 +1,4 @@
-import { register as registerApi } from "src/api/auth";
+import { register as registerApi, login as loginApi } from "src/api/auth";
 import { useAuth } from "src/context/AuthContext";
 import Cookies from "js-cookie";
 
@@ -21,7 +21,21 @@ const useAuthActions = () => {
     }
   };
 
-  return { register };
+  const login = async (body) => {
+    setUser({ ...user, loading: true });
+    try {
+      const response = await loginApi(body);
+      const user = response?.data?.user || null;
+      Cookies.set("token", user?.token || "");
+      setUser({ data: user, loading: false });
+      return { status: 1, data: response };
+    } catch (error) {
+      setUser({ user: null, loading: false, error: error });
+      return { status: 0, data: error };
+    }
+  };
+
+  return { register, login };
 };
 
 export { useAuthActions };

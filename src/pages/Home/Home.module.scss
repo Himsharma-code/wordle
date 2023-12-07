@@ -24,6 +24,9 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
       margin-bottom: 40px;
+      &.isLogin {
+        grid-template-columns: 1fr;
+      }
     }
     .dateContainer {
       h3 {
