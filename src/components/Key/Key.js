@@ -4,28 +4,29 @@ import classes from "./Key.module.scss";
 import cn from "classnames";
 
 function Key({ keyVal, bigKey, disabled }) {
+  const { value = "", label = "" } = keyVal;
   const { gameOver, onSelectLetter, onDelete, onEnter } =
     useContext(AppContext);
 
   const selectLetter = () => {
     if (gameOver.gameOver) return;
-    if (keyVal === "ENTER") {
+    if (value === "ENTER") {
       onEnter();
-    } else if (keyVal === "BACK") {
+    } else if (value === "BACK") {
       onDelete();
     } else {
-      onSelectLetter(keyVal);
+      onSelectLetter(value);
     }
   };
   return (
     <div
       className={cn(classes.key, {
-        [classes.enter]: keyVal === "ENTER" || keyVal === "BACK",
+        [classes.enter]: value === "ENTER" || value === "BACK",
       })}
       id={bigKey ? "big" : disabled && "disabled"}
       onClick={selectLetter}
     >
-      {keyVal}
+      {label}
     </div>
   );
 }
