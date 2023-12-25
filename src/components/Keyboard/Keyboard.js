@@ -91,10 +91,7 @@ function Keyboard() {
             />
           );
         })}
-        <Key
-          keyVal={<BackspaceIcon fontSize="small" sx={{ px: 1 }} />}
-          bigKey
-        />
+        <Key keyVal={"BACK"} bigKey />
       </div>
     </div>
   );

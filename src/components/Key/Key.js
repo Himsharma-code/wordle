@@ -11,7 +11,7 @@ function Key({ keyVal, bigKey, disabled }) {
     if (gameOver.gameOver) return;
     if (keyVal === "ENTER") {
       onEnter();
-    } else if (keyVal === "DELETE") {
+    } else if (keyVal === "BACK") {
       onDelete();
     } else {
       onSelectLetter(keyVal);
@@ -20,7 +20,7 @@ function Key({ keyVal, bigKey, disabled }) {
   return (
     <div
       className={cn(classes.key, {
-        [classes.enter]: keyVal === "ENTER" || keyVal === "DELETE",
+        [classes.enter]: keyVal === "ENTER" || keyVal === "BACK",
       })}
       id={bigKey ? "big" : disabled && "disabled"}
       onClick={selectLetter}
